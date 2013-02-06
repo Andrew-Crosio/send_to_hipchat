@@ -3,6 +3,13 @@
 import argparse
 import urllib
 import urllib2
+import os
+
+try:
+    AUTH_KEY = os.environ['HIPCHAT_AUTH_KEY']
+except KeyError:
+    print 'Unable to acquire HIPCHAT_AUTH_KEY from environment'
+    exit(1)
 
 
 parser = argparse.ArgumentParser(description='Send to hipchat')
@@ -43,6 +50,7 @@ def run():
         print 'Successfully sent message'
     else:
         print 'Encountered error sending message'
+        exit(1)
 
 
 if __name__ == '__main__':
